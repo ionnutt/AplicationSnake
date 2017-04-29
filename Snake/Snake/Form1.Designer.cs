@@ -39,41 +39,41 @@
             // 
             // pbCanvas
             // 
-            this.pbCanvas.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pbCanvas.Location = new System.Drawing.Point(24, 74);
+            this.pbCanvas.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.pbCanvas.Location = new System.Drawing.Point(13, 13);
             this.pbCanvas.Name = "pbCanvas";
-            this.pbCanvas.Size = new System.Drawing.Size(580, 458);
+            this.pbCanvas.Size = new System.Drawing.Size(432, 424);
             this.pbCanvas.TabIndex = 0;
             this.pbCanvas.TabStop = false;
             this.pbCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pbCanvas_Paint);
+            this.pbCanvas.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pbCanvas_PreviewKeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe Print", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(610, 71);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(451, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 62);
+            this.label1.Size = new System.Drawing.Size(118, 37);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Score:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Text = "Score: ";
             // 
             // lblScore
             // 
             this.lblScore.AutoSize = true;
-            this.lblScore.Font = new System.Drawing.Font("Segoe Print", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblScore.Location = new System.Drawing.Point(749, 82);
+            this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScore.Location = new System.Drawing.Point(604, 13);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(0, 51);
+            this.lblScore.Size = new System.Drawing.Size(0, 37);
             this.lblScore.TabIndex = 2;
             // 
             // lblGameOver
             // 
             this.lblGameOver.AutoSize = true;
-            this.lblGameOver.Font = new System.Drawing.Font("Palatino Linotype", 24F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblGameOver.Location = new System.Drawing.Point(96, 194);
+            this.lblGameOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGameOver.Location = new System.Drawing.Point(67, 45);
             this.lblGameOver.Name = "lblGameOver";
-            this.lblGameOver.Size = new System.Drawing.Size(96, 44);
+            this.lblGameOver.Size = new System.Drawing.Size(102, 37);
             this.lblGameOver.TabIndex = 3;
             this.lblGameOver.Text = "label2";
             this.lblGameOver.Visible = false;
@@ -82,13 +82,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 559);
+            this.ClientSize = new System.Drawing.Size(723, 437);
             this.Controls.Add(this.lblGameOver);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pbCanvas);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
