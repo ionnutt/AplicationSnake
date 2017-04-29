@@ -46,7 +46,6 @@
             this.pbCanvas.TabIndex = 0;
             this.pbCanvas.TabStop = false;
             this.pbCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pbCanvas_Paint);
-            this.pbCanvas.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pbCanvas_PreviewKeyDown);
             // 
             // label1
             // 

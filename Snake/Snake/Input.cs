@@ -1,37 +1,28 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using System.Windows.Forms;
 
 namespace Snake
 {
-    class Input
+    internal class Input
     {
-        //Incarcam liste cu posibilele kayboard buttons
+        //Load list of available Keyboard buttons
         private static Hashtable keyTable = new Hashtable();
 
-        //Perform a check to see if   a particular  button  is pressed
+        //Perform a check to see if a particular button is pressed.
         public static bool KeyPressed(Keys key)
         {
-            if(keyTable[key] == null)
+            if (keyTable[key] == null)
             {
                 return false;
             }
-            return (bool)keyTable[key];
+
+            return (bool) keyTable[key];
         }
 
-        //Detect if a keyboard is pressed
-        public  static void ChangeState(Keys key, bool state)
+        //Detect if a keyboard button is pressed
+        public static void ChangeState(Keys key, bool state)
         {
             keyTable[key] = state;
-        }
-
-        internal static bool Pressed(Keys right)
-        {
-            throw new NotImplementedException();
         }
     }
 }
