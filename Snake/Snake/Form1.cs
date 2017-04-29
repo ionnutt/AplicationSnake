@@ -19,22 +19,18 @@ namespace Snake
 
         public Form1()
         {
+            InitializeComponent();
+
             //Set settings to default
             new Settings();
 
-
             //Set game speed and start timer
-            gameTimer.Interval = 1000 / Settings.Speed;
-            gameTimer.Tick += UpdateScore();
+            gameTimer.Interval = 100 / Settings.Speed;
+            gameTimer.Tick += UpdateScreen;
             gameTimer.Start();
 
-            //Start New Game
+            //Start New game
             StartGame();
-        }
-
-        private EventHandler UpdateScore()
-        {
-            throw new NotImplementedException();
         }
 
         private void StartGame()
@@ -92,7 +88,6 @@ namespace Snake
                     Settings.direction = Direction.Down;
 
                 MovePlayer();
-
             }
 
             pbCanvas.Invalidate();
@@ -106,7 +101,7 @@ namespace Snake
         {
             Graphics canvas = e.Graphics;
 
-            if(Settings.GameOver != false)
+            if(Settings.GameOver)
             {
                 //Draw snake
 
@@ -114,7 +109,10 @@ namespace Snake
                 {
                     //Draw head
                     if (i == 0)
+                    {
                         Brush snakeColour = Brushes.Black;
+                    }
+                        
                     else
                         //Draw rest for body
                         snakeColour = Brushes.Green;
@@ -126,8 +124,10 @@ namespace Snake
                                       Settings.Width, Settings.Height));
 
                     //Draw food
-                    canvas.FillEllipse(Brushes.Red,
-                        new Rectangle(food.X * Settings.Height, Settings.Width, Settings.Height));
+
+                      canvas.FillEllipse(Brushes.Red,
+                        new Rectangle(food.X * Settings.Width,
+                             food.Y * Settings.Height, Settings.Width, Settings.Height));
 
                 }
             }
@@ -141,7 +141,7 @@ namespace Snake
 
         private void MovePlayer()
         {
-            for(int i =Snake.Count -1; i>0; i--)
+            for(int i =Snake.Count -1; i>=0; i--)
             {
                 //Move head
                 if (i == 0 )
@@ -154,6 +154,32 @@ namespace Snake
                         case Direction.Down: Snake[i].Y++; break;
 
                     }
+
+                    //Get maximum X and Y position 
+                    int maxXPos = pbCanvas.Size.Width / Settings.Width;
+                    int maxYPos = pbCanvas.Size.Height / Settings.Height;
+
+                    //Detect  collissition with game borders
+                    if (Snake[i].X < 0 || Snake[i].Y < 0
+                        || Snake[i].X >= maxXPos || Snake[i].Y >= maxYPos)
+                    {
+                        //Die();
+                    }
+
+                    //Detect collission with body 
+                    for(int j=1; j< Snake.Count; j++)
+                    {
+                        if(Snake[i].X == Snake[j].X && Snake[i].Y == Snake[j].Y)
+                        {
+                           // Die();
+                        }
+                    }
+
+                    //Detect  collission with food piece 
+                    if(Snake[0].X == food.X && Snake[0].Y == food.Y)
+                    {
+                        //Eat();
+                    }
                 }
                 else
                 {
@@ -162,6 +188,46 @@ namespace Snake
                     Snake[i].Y = Snake[i - 1].Y;
                 }
             }
+        }
+
+        private void Eat()
+        {
+            Circle food = new Circle();
+            food.X = Snake[Snake.Count - 1].X;
+            food.Y = Snake[Snake.Count - 1].Y;
+
+            Snake.Add(food);
+
+            //Update score
+
+            Settings.Score += Settings.Points;
+            lblScore.Text = Settings.Score.ToString();
+
+
+            GenerateFood();
+        }
+
+        
+        private void Die()
+        {
+            Settings.GameOver = true;
+        }
+
+
+        private void Form1_KeyDown(Object sender, KeyEventArgs e)
+        {
+            Input.ChangeState(e.KeyCode, true);
+
+        }
+        private void Form1_KeyUp(Object sender, KeyEventArgs e)
+        {
+            Input.ChangeState(e.KeyCode, false);
+
+        }
+
+        private void pbCanvas_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            Input.ChangeState(e.KeyCode, true);
         }
     }
 }
